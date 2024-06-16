@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal</title>
+    <title>Document</title>
 </head>
-
 <body>
-    <ol>
-        <p>Date: {{$nepaliDate}}</p>
-        @foreach ($royal as $ro)
-        <li>{{$ro}}</li>
-        @endforeach
-    </ol>
+    <p>English Date: {{request()->route('englishDate')}}</p>
+    <p>Nepali Date: {{$nepaliDate}}</p>
 </body>
-
 </html>

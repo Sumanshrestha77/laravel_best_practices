@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\CompanyData;
+use App\Services\DateConversionService;
 
 class BookController extends Controller
 {
-    public function where()
+    protected $dateConversionService;
+    public function __construct(DateConversionService $dateConversionService)
     {
+        $this->dateConversionService= $dateConversionService;
+    }
+    public function showNepaliDate($englishDate){
+        $nepaliDate = $this->dateConversionService->converttoNepaliDate($englishDate);
+        return view('nepaliDate', ['nepaliDate'=>$nepaliDate]);
+    }
+    public function where($englishDate)
+    {
+        $nepaliDate = $this->dateConversionService->converttoNepaliDate($englishDate);
+
         $royal = CompanyData::where('company_name', '=', 'Royal Enfield')->select('company_name', 'items_name')->get();
-        return view('db.where', ['royal' => $royal]);
+        return view('db.where', ['royal' => $royal, 'nepaliDate'=>$nepaliDate]);
     }
     public function index()
     {
